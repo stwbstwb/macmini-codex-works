@@ -32,6 +32,7 @@ Codexオートメーションで毎月実行する処理を置きます。
 最新の未作成号に3件分の有効テーマがない場合は、その号を作成済みにせず、同じ実行内で次の未作成号へ遡る。遡っても3件分の有効テーマがない場合は `blocked_insufficient_articles` とし、ニュース区分・地域限定素材などで件数を埋めない。
 WordPress下書き保存後は `reconcile_wordpress_state_from_publish_log.py` で `08_state` の投稿履歴を補修し、履歴が現在runの3件をカバーしない場合は後工程の成功扱いにしない。
 最終通知前には `verify_final_run_contract.py --allow-missing-notification` を必ず通し、3件のWordPress下書き、Drive確認用テキスト、記事品質、画像品質、最新ログ、状態履歴が揃っていない場合は成功通知ではなく要確認通知にする。
+最終通知前には `run_git_hygiene.py` も通し、生成物・実行ログ・状態ファイル・秘密情報パスがGit追跡対象に戻っていないこと、無視されていない未追跡ファイルが残っていないことを確認する。失敗した場合は成功通知へ進まず要確認扱いにする。
 最終通知後の契約テストでは、通知結果の `manifest_sha256` も現在の `post_payloads_latest.json` と一致することを確認する。古い通知ログや別run通知は成功根拠にしない。
 WordPress下書き保存、状態補修、WordPress読み返し検証、Drive保存、最終通知はステップ別に再試行する。外部一時エラーは最大3回まで再試行し、manifest不一致、件数不一致、同一run状態不一致など決定的な不整合は再試行で成功扱いにしない。
 WordPress保存ログ、WordPress検証ログ、Drive保存メタデータ、最終通知payloadには現在の `post_payloads_latest.json` のSHA-256を記録する。後工程はこのハッシュが一致しないログを現在runの成功根拠に使わない。
@@ -150,6 +151,14 @@ WordPress保存ログから `08_state` を補修する場合:
 
 通知送信後の検証では `--allow-missing-notification` を外す。通知ログが最終成果物より古い場合はNGにする。
 
+Git衛生チェック:
+
+```bash
+/Users/ug/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 06_automation/run_git_hygiene.py
+```
+
+このチェックは、`02_analysis`、`03_generated`、`04_wordpress`、`05_drive`、`07_logs`、`08_state`、`config/secrets` などの実行生成物・秘密情報系パスがGit追跡対象に入っていないことを確認する。実行結果はローカルには残すが、Gitにはコード・仕様・README類だけを残す。
+
 現在できること:
 
 - 入力CSV・PDF解析
@@ -183,6 +192,7 @@ WordPress保存ログから `08_state` を補修する場合:
 - 成功・失敗を問わないメール通知処理
 - 同一runの通知重複を防ぐ送信済みマーカー
 - 最終通知本文が `partial` の場合に処理全体を成功扱いしない判定
+- 最終通知前のGit衛生チェック
 - 通知メールで3件分の人事労務だより号・掲載箇所・元トピック・重複確認を表示
 - SMTP秘密ファイルを使ったメール送信
 - メール送信できない場合の `.eml` バックアップ保存

@@ -16,6 +16,14 @@ config/secrets/*
 !08_state/.gitkeep
 !08_state/README.md
 
+# Generated analysis artifacts
+02_analysis/cannibalization/*
+!02_analysis/cannibalization/README.md
+02_analysis/seo/*
+!02_analysis/seo/README.md
+02_analysis/topic-selection/*
+!02_analysis/topic-selection/README.md
+
 # Local success-state backups
 00_project/backups/*
 
@@ -34,6 +42,12 @@ config/secrets/*
 !03_generated/wordpress-payloads/.gitkeep
 03_generated/review-texts/*
 !03_generated/review-texts/.gitkeep
+
+# Generated external service reports
+04_wordpress/*
+!04_wordpress/README.md
+05_drive/*
+!05_drive/README.md
 
 # Browser automation profile
 .playwright/

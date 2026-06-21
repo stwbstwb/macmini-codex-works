@@ -142,6 +142,20 @@ def main() -> int:
                 return_code=1,
             )
 
+        git_hygiene = run_step_with_retries(
+            "git_hygiene",
+            ["06_automation/run_git_hygiene.py"],
+            success_payload_statuses={"ok"},
+        )
+        payload["steps"].append(git_hygiene)
+        if git_hygiene.get("returncode") != 0 or git_hygiene.get("payload_status") != "ok":
+            return finish_with_notification(
+                payload,
+                "partial",
+                "実行結果のGit衛生チェックがOKではありません。",
+                return_code=1,
+            )
+
         notification = run_step_with_retries(
             "final_notification",
             ["06_automation/send_manual_full_test_notification.py"],

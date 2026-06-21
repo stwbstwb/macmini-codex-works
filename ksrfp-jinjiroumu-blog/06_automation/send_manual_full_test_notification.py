@@ -304,6 +304,13 @@ def main() -> int:
         else:
             payload["status"] = "ok"
             payload["publication_gate"] = "draft_saved_for_review"
+        git_hygiene = run_local_step("git_hygiene", ["06_automation/run_git_hygiene.py"])
+        payload["git_hygiene"] = git_hygiene
+        hygiene_payload = git_hygiene.get("payload") if isinstance(git_hygiene.get("payload"), dict) else {}
+        if git_hygiene.get("returncode") != 0 or hygiene_payload.get("status") != "ok":
+            payload["status"] = "partial"
+            payload["publication_gate"] = "blocked_until_git_hygiene_passes"
+            payload["error"] = "Git衛生チェックがOKではないため、成功扱いにしていません。"
     write_json(LOGS_DIR / "manual_full_test_latest.json", payload)
     write_json(LOGS_DIR / "automation_final_latest.json", payload)
     write_json(LOGS_DIR / "weekly_latest.json", payload)
