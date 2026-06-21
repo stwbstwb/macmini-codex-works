@@ -1,0 +1,134 @@
+{
+  "generated_at": "2026-06-21T13:11:07",
+  "status": "ok",
+  "checks": {
+    "drive": {
+      "ok": true,
+      "checked": true,
+      "status": "ok",
+      "drive_pdf_count": 17,
+      "selected_drive_pdf": "人事労務だより2026.5月号.pdf",
+      "all_drive_pdfs_completed": false
+    },
+    "wordpress_network": {
+      "host": "ksrfp.com",
+      "port": 443,
+      "dns_ok": true,
+      "tcp_ok": true,
+      "resolved_addresses": [
+        "183.181.83.111"
+      ],
+      "connected_address": "183.181.83.111",
+      "url": "https://ksrfp.com/wp-json/wp/v2",
+      "scheme": "https",
+      "ok": true
+    },
+    "wordpress_credentials": {
+      "ok": true,
+      "secret_file_found": true,
+      "username_found": true,
+      "application_password_found": true
+    },
+    "wordpress_connection": {
+      "ok": true,
+      "http_status": 200,
+      "user_id": 2,
+      "user_slug": "_ksrfp_profile_",
+      "user_name": "柏谷英之"
+    },
+    "wordpress_categories": {
+      "ok": true,
+      "count": 9,
+      "configured_count": 6,
+      "comparison": [
+        {
+          "slug": "life-planning",
+          "configured_id": 13,
+          "configured_name": "ライフプランニング",
+          "live_id": 13,
+          "live_name": "ライフプランニング",
+          "matched": true
+        },
+        {
+          "slug": "subsidy",
+          "configured_id": 5,
+          "configured_name": "助成金",
+          "live_id": 5,
+          "live_name": "助成金",
+          "matched": true
+        },
+        {
+          "slug": "labor-management",
+          "configured_id": 7,
+          "configured_name": "労務管理",
+          "live_id": 7,
+          "live_name": "労務管理",
+          "matched": true
+        },
+        {
+          "slug": "pension",
+          "configured_id": 15,
+          "configured_name": "年金",
+          "live_id": 15,
+          "live_name": "年金",
+          "matched": true
+        },
+        {
+          "slug": "payroll",
+          "configured_id": 25,
+          "configured_name": "給与計算",
+          "live_id": 25,
+          "live_name": "給与計算",
+          "matched": true
+        },
+        {
+          "slug": "benefits",
+          "configured_id": 10,
+          "configured_name": "給付金",
+          "live_id": 10,
+          "live_name": "給付金",
+          "matched": true
+        }
+      ],
+      "mismatches": []
+    },
+    "smtp_settings": {
+      "ok": true,
+      "secret_path": "/Users/ug/Desktop/codex_works/ksrfp-jinjiroumu-blog/config/secrets/email_smtp.json",
+      "secret_found": true,
+      "host_found": true,
+      "username_found": true,
+      "password_found": true,
+      "from_email_found": true
+    },
+    "smtp_network": {
+      "host": "smtp.gmail.com",
+      "port": 587,
+      "dns_ok": true,
+      "tcp_ok": true,
+      "resolved_addresses": [
+        "2404:6800:4003:c1a::6c",
+        "64.233.170.108"
+      ],
+      "connected_address": "2404:6800:4003:c1a::6c",
+      "ok": true
+    },
+    "smtp_login": {
+      "checked": true,
+      "ok": true
+    },
+    "image_generation": {
+      "ok": true,
+      "checked": true,
+      "provider": "codex_image_tool_handoff",
+      "model": "chatgpt_max_plan_imagegen",
+      "handoff_required": true,
+      "warning": "画像生成はCodexセッション内ツールへ引き継ぐ運用のため、Python単体の画像生成はプリフライト必須条件にしない。"
+    }
+  },
+  "errors": [],
+  "notes": [
+    "Secrets are checked only for presence and are never printed.",
+    "This preflight must run in the same automation environment before Drive review-text upload and WordPress writes."
+  ]
+}

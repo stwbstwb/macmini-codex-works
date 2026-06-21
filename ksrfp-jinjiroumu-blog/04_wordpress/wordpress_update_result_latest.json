@@ -1,0 +1,40 @@
+{
+  "status": "updated",
+  "generated_at": "2026-06-19T18:56:28",
+  "post": {
+    "id": 4712,
+    "status": "draft",
+    "date": "2026-06-22T09:00:00",
+    "date_gmt": "2026-06-22T00:00:00",
+    "link": "https://ksrfp.com/?p=4712",
+    "title": "働き方改革関連法施行後に見直したい中小企業の労働時間管理"
+  },
+  "content_h1_removed": true,
+  "content_contains_h2": true,
+  "content_length": 8219,
+  "media": {
+    "id": 4717,
+    "link": "https://ksrfp.com/ksrfp/wp-content/uploads/working-hours-featured-1.jpg"
+  },
+  "topic_key": "2cb51c7f0e3fb37f",
+  "state_record": {
+    "wordpress_post_id": 4712,
+    "wordpress_url": "https://ksrfp.com/?p=4712",
+    "wordpress_status": "draft",
+    "scheduled_local": "2026-06-22T09:00:00",
+    "scheduled_gmt": "2026-06-22T00:00:00",
+    "status": "draft",
+    "topic_key": "2cb51c7f0e3fb37f",
+    "pdf_name": "人事労務だより2026.5月号.pdf",
+    "section_group": "調査",
+    "topic_title": "「労働時間現状維持希望」多く  働き方改革関連法施行後５年の総点検  厚労省",
+    "title": "働き方改革関連法施行後に見直したい中小企業の労働時間管理",
+    "category_ids": [
+      7
+    ],
+    "tags": [],
+    "featured_media_id": 4717,
+    "updated_at": "2026-06-19T18:56:28"
+  },
+  "latest_payload_status": "draft"
+}

@@ -1,0 +1,224 @@
+{
+  "generated_at": "2026-06-21T13:11:07",
+  "status": "ok",
+  "external_api_enabled": true,
+  "public_folder_enabled": true,
+  "download_latest_enabled": true,
+  "auth_token_found": false,
+  "folder_id": "1oVBX-B1XliOCEcxqghojOjMzKvROpqBn",
+  "drive_pdf_count": 17,
+  "drive_pdfs": [
+    {
+      "id": "1DUQBIEO8FELXUzfMy5RK05Z8NgeiqQgL",
+      "name": "人事労務だより2026.5月号.pdf",
+      "period_key": "2026-05",
+      "mimeType": "application/pdf",
+      "webViewLink": "https://drive.google.com/file/d/1DUQBIEO8FELXUzfMy5RK05Z8NgeiqQgL/view",
+      "downloadLink": "https://drive.google.com/uc?export=download&id=1DUQBIEO8FELXUzfMy5RK05Z8NgeiqQgL"
+    },
+    {
+      "id": "1twGSKzvuxSm83HJR7qm7wihTODfV-CFx",
+      "name": "人事労務だより2026.4月号.pdf",
+      "period_key": "2026-04",
+      "mimeType": "application/pdf",
+      "webViewLink": "https://drive.google.com/file/d/1twGSKzvuxSm83HJR7qm7wihTODfV-CFx/view",
+      "downloadLink": "https://drive.google.com/uc?export=download&id=1twGSKzvuxSm83HJR7qm7wihTODfV-CFx"
+    },
+    {
+      "id": "1JLfaC2GX4jK2-gJQpDR9gABw6Zn2XId3",
+      "name": "人事労務だより2026.3月号.pdf",
+      "period_key": "2026-03",
+      "mimeType": "application/pdf",
+      "webViewLink": "https://drive.google.com/file/d/1JLfaC2GX4jK2-gJQpDR9gABw6Zn2XId3/view",
+      "downloadLink": "https://drive.google.com/uc?export=download&id=1JLfaC2GX4jK2-gJQpDR9gABw6Zn2XId3"
+    },
+    {
+      "id": "1qPoVxccSIBUSZAawVkU6aXKgjzC52t3V",
+      "name": "人事労務だより2026.2月号.pdf",
+      "period_key": "2026-02",
+      "mimeType": "application/pdf",
+      "webViewLink": "https://drive.google.com/file/d/1qPoVxccSIBUSZAawVkU6aXKgjzC52t3V/view",
+      "downloadLink": "https://drive.google.com/uc?export=download&id=1qPoVxccSIBUSZAawVkU6aXKgjzC52t3V"
+    },
+    {
+      "id": "1SnNrwhZw84ZPUCreih3jrKTE5LEkTaSm",
+      "name": "人事労務だより2026.1月号.pdf",
+      "period_key": "2026-01",
+      "mimeType": "application/pdf",
+      "webViewLink": "https://drive.google.com/file/d/1SnNrwhZw84ZPUCreih3jrKTE5LEkTaSm/view",
+      "downloadLink": "https://drive.google.com/uc?export=download&id=1SnNrwhZw84ZPUCreih3jrKTE5LEkTaSm"
+    },
+    {
+      "id": "1Dt_ohAmoFQygz-baKqYv7rZXBjfKsbcn",
+      "name": "人事労務だより2025.12月号.pdf",
+      "period_key": "2025-12",
+      "mimeType": "application/pdf",
+      "webViewLink": "https://drive.google.com/file/d/1Dt_ohAmoFQygz-baKqYv7rZXBjfKsbcn/view",
+      "downloadLink": "https://drive.google.com/uc?export=download&id=1Dt_ohAmoFQygz-baKqYv7rZXBjfKsbcn"
+    },
+    {
+      "id": "1kRLZi2Crrm3UM_WgbjZ6b44wnM1aQ9gI",
+      "name": "人事労務だより2025.11月号.pdf",
+      "period_key": "2025-11",
+      "mimeType": "application/pdf",
+      "webViewLink": "https://drive.google.com/file/d/1kRLZi2Crrm3UM_WgbjZ6b44wnM1aQ9gI/view",
+      "downloadLink": "https://drive.google.com/uc?export=download&id=1kRLZi2Crrm3UM_WgbjZ6b44wnM1aQ9gI"
+    },
+    {
+      "id": "1y79_nh-xKHggAzaP1nJxF4J_E9AKpdN1",
+      "name": "人事労務だより2025.10月号.pdf",
+      "period_key": "2025-10",
+      "mimeType": "application/pdf",
+      "webViewLink": "https://drive.google.com/file/d/1y79_nh-xKHggAzaP1nJxF4J_E9AKpdN1/view",
+      "downloadLink": "https://drive.google.com/uc?export=download&id=1y79_nh-xKHggAzaP1nJxF4J_E9AKpdN1"
+    },
+    {
+      "id": "1nvc0oP9tCKWBBaYywY8nzWakB9PCV_ql",
+      "name": "人事労務だより2025.9月号.pdf",
+      "period_key": "2025-09",
+      "mimeType": "application/pdf",
+      "webViewLink": "https://drive.google.com/file/d/1nvc0oP9tCKWBBaYywY8nzWakB9PCV_ql/view",
+      "downloadLink": "https://drive.google.com/uc?export=download&id=1nvc0oP9tCKWBBaYywY8nzWakB9PCV_ql"
+    },
+    {
+      "id": "1x1L5ZKxl2oKA01cRELBrWFeGo6yj9GMf",
+      "name": "人事労務だより2025.8月号.pdf",
+      "period_key": "2025-08",
+      "mimeType": "application/pdf",
+      "webViewLink": "https://drive.google.com/file/d/1x1L5ZKxl2oKA01cRELBrWFeGo6yj9GMf/view",
+      "downloadLink": "https://drive.google.com/uc?export=download&id=1x1L5ZKxl2oKA01cRELBrWFeGo6yj9GMf"
+    },
+    {
+      "id": "1nR0RzpIclRX9C4tyLlkYuRIAR6hMN2RF",
+      "name": "人事労務だより2025.7月号.pdf",
+      "period_key": "2025-07",
+      "mimeType": "application/pdf",
+      "webViewLink": "https://drive.google.com/file/d/1nR0RzpIclRX9C4tyLlkYuRIAR6hMN2RF/view",
+      "downloadLink": "https://drive.google.com/uc?export=download&id=1nR0RzpIclRX9C4tyLlkYuRIAR6hMN2RF"
+    },
+    {
+      "id": "1kFpADZq699NCvdgu2Vq94U5Sy-ipBWzx",
+      "name": "人事労務だより2025.6月号.pdf",
+      "period_key": "2025-06",
+      "mimeType": "application/pdf",
+      "webViewLink": "https://drive.google.com/file/d/1kFpADZq699NCvdgu2Vq94U5Sy-ipBWzx/view",
+      "downloadLink": "https://drive.google.com/uc?export=download&id=1kFpADZq699NCvdgu2Vq94U5Sy-ipBWzx"
+    },
+    {
+      "id": "19W-UTFbSztDSIHlvYbfDhly2SMvkhZSN",
+      "name": "人事労務だより2025.5月号.pdf",
+      "period_key": "2025-05",
+      "mimeType": "application/pdf",
+      "webViewLink": "https://drive.google.com/file/d/19W-UTFbSztDSIHlvYbfDhly2SMvkhZSN/view",
+      "downloadLink": "https://drive.google.com/uc?export=download&id=19W-UTFbSztDSIHlvYbfDhly2SMvkhZSN"
+    },
+    {
+      "id": "1F-M9sRX6Yq7gJ7rMarTCP2suVA25JKKX",
+      "name": "人事労務だより2025.4月号.pdf",
+      "period_key": "2025-04",
+      "mimeType": "application/pdf",
+      "webViewLink": "https://drive.google.com/file/d/1F-M9sRX6Yq7gJ7rMarTCP2suVA25JKKX/view",
+      "downloadLink": "https://drive.google.com/uc?export=download&id=1F-M9sRX6Yq7gJ7rMarTCP2suVA25JKKX"
+    },
+    {
+      "id": "1z5SnafL7bikC1SECpEstfe6w8c6fuHTy",
+      "name": "人事労務だより2025.3月号.pdf",
+      "period_key": "2025-03",
+      "mimeType": "application/pdf",
+      "webViewLink": "https://drive.google.com/file/d/1z5SnafL7bikC1SECpEstfe6w8c6fuHTy/view",
+      "downloadLink": "https://drive.google.com/uc?export=download&id=1z5SnafL7bikC1SECpEstfe6w8c6fuHTy"
+    },
+    {
+      "id": "1dyIoMSCqSgNmCM93UqlJpJHyWcOzxrOi",
+      "name": "人事労務だより2025.2月号.pdf",
+      "period_key": "2025-02",
+      "mimeType": "application/pdf",
+      "webViewLink": "https://drive.google.com/file/d/1dyIoMSCqSgNmCM93UqlJpJHyWcOzxrOi/view",
+      "downloadLink": "https://drive.google.com/uc?export=download&id=1dyIoMSCqSgNmCM93UqlJpJHyWcOzxrOi"
+    },
+    {
+      "id": "1U1kTWyGIvFNGEpL-I1YmNIqC4R-sAW-Z",
+      "name": "人事労務だより2025.1月号.pdf",
+      "period_key": "2025-01",
+      "mimeType": "application/pdf",
+      "webViewLink": "https://drive.google.com/file/d/1U1kTWyGIvFNGEpL-I1YmNIqC4R-sAW-Z/view",
+      "downloadLink": "https://drive.google.com/uc?export=download&id=1U1kTWyGIvFNGEpL-I1YmNIqC4R-sAW-Z"
+    }
+  ],
+  "latest_drive_pdf": {
+    "id": "1DUQBIEO8FELXUzfMy5RK05Z8NgeiqQgL",
+    "name": "人事労務だより2026.5月号.pdf",
+    "period_key": "2026-05",
+    "mimeType": "application/pdf",
+    "webViewLink": "https://drive.google.com/file/d/1DUQBIEO8FELXUzfMy5RK05Z8NgeiqQgL/view",
+    "downloadLink": "https://drive.google.com/uc?export=download&id=1DUQBIEO8FELXUzfMy5RK05Z8NgeiqQgL"
+  },
+  "selected_drive_pdf": {
+    "id": "1DUQBIEO8FELXUzfMy5RK05Z8NgeiqQgL",
+    "name": "人事労務だより2026.5月号.pdf",
+    "period_key": "2026-05",
+    "mimeType": "application/pdf",
+    "webViewLink": "https://drive.google.com/file/d/1DUQBIEO8FELXUzfMy5RK05Z8NgeiqQgL/view",
+    "downloadLink": "https://drive.google.com/uc?export=download&id=1DUQBIEO8FELXUzfMy5RK05Z8NgeiqQgL"
+  },
+  "all_drive_pdfs_completed": false,
+  "downloaded_pdf": {
+    "status": "already_exists",
+    "name": "人事労務だより2026.5月号.pdf",
+    "path": "/Users/ug/Desktop/codex_works/ksrfp-jinjiroumu-blog/01_inputs/newsletters/drive-downloads/人事労務だより2026.5月号.pdf",
+    "size": 2000436
+  },
+  "local_pdf_count": 6,
+  "local_pdfs": [
+    {
+      "name": "人事労務だより2026.5月号.pdf",
+      "path": "/Users/ug/Desktop/codex_works/ksrfp-jinjiroumu-blog/01_inputs/newsletters/drive-downloads/人事労務だより2026.5月号.pdf",
+      "source": "drive-downloads",
+      "period_key": "2026-05",
+      "modified_at": "2026-06-19T17:11:20"
+    },
+    {
+      "name": "人事労務だより2026.5月号.pdf",
+      "path": "/Users/ug/Desktop/codex_works/ksrfp-jinjiroumu-blog/01_inputs/newsletters/local-samples/人事労務だより2026.5月号.pdf",
+      "source": "local-samples",
+      "period_key": "2026-05",
+      "modified_at": "2026-06-19T10:25:35"
+    },
+    {
+      "name": "人事労務だより2026.4月号.pdf",
+      "path": "/Users/ug/Desktop/codex_works/ksrfp-jinjiroumu-blog/01_inputs/newsletters/drive-downloads/人事労務だより2026.4月号.pdf",
+      "source": "drive-downloads",
+      "period_key": "2026-04",
+      "modified_at": "2026-06-20T15:25:23"
+    },
+    {
+      "name": "人事労務だより2026.3月号.pdf",
+      "path": "/Users/ug/Desktop/codex_works/ksrfp-jinjiroumu-blog/01_inputs/newsletters/drive-downloads/人事労務だより2026.3月号.pdf",
+      "source": "drive-downloads",
+      "period_key": "2026-03",
+      "modified_at": "2026-06-20T18:48:57"
+    },
+    {
+      "name": "人事労務だより2026.2月号.pdf",
+      "path": "/Users/ug/Desktop/codex_works/ksrfp-jinjiroumu-blog/01_inputs/newsletters/drive-downloads/人事労務だより2026.2月号.pdf",
+      "source": "drive-downloads",
+      "period_key": "2026-02",
+      "modified_at": "2026-06-20T21:58:37"
+    },
+    {
+      "name": "人事労務だより2025.1月号.pdf",
+      "path": "/Users/ug/Desktop/codex_works/ksrfp-jinjiroumu-blog/01_inputs/newsletters/local-samples/人事労務だより2025.1月号.pdf",
+      "source": "local-samples",
+      "period_key": "2025-01",
+      "modified_at": "2026-06-19T10:25:35"
+    }
+  ],
+  "latest_local_pdf": {
+    "name": "人事労務だより2026.5月号.pdf",
+    "path": "/Users/ug/Desktop/codex_works/ksrfp-jinjiroumu-blog/01_inputs/newsletters/drive-downloads/人事労務だより2026.5月号.pdf",
+    "source": "drive-downloads",
+    "period_key": "2026-05",
+    "modified_at": "2026-06-19T17:11:20"
+  },
+  "next_action": "未作成の最新号を解析対象にする。"
+}

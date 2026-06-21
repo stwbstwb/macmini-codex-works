@@ -1,0 +1,142 @@
+{
+  "status": "ok",
+  "started_at": "2026-06-20T18:08:03",
+  "finished_at": "2026-06-20T18:08:06",
+  "items": [
+    {
+      "status": "ok",
+      "item_index": 1,
+      "post_id": 4776,
+      "title": "働き方改革関連法施行後に見直したい中小企業の労働時間管理",
+      "expected_media_id": 4789,
+      "expected_alt_text": "中小企業の労働時間管理と36協定の見直しを表すビジネスイメージ",
+      "media_url": "https://ksrfp.com/ksrfp/wp-content/uploads/refresh-1-working-hours-featured.jpg",
+      "media_alt_text": "中小企業の労働時間管理と36協定の見直しを表すビジネスイメージ",
+      "actual": {
+        "status": "draft",
+        "date": "2026-06-22T09:00:00",
+        "featured_media": 4789
+      },
+      "checks": {
+        "status_draft": true,
+        "featured_media_matches": true,
+        "media_is_supported_image": true,
+        "alt_text_matches": true
+      }
+    },
+    {
+      "status": "ok",
+      "item_index": 2,
+      "post_id": 4778,
+      "title": "人材開発支援助成金とは？中小企業が確認したいリスキリング支援の実務",
+      "expected_media_id": 4791,
+      "expected_alt_text": "社員研修とリスキリング支援の実務を表すビジネスイメージ",
+      "media_url": "https://ksrfp.com/ksrfp/wp-content/uploads/refresh-2-subsidy-featured.jpg",
+      "media_alt_text": "社員研修とリスキリング支援の実務を表すビジネスイメージ",
+      "actual": {
+        "status": "draft",
+        "date": "2026-06-22T09:00:00",
+        "featured_media": 4791
+      },
+      "checks": {
+        "status_draft": true,
+        "featured_media_matches": true,
+        "media_is_supported_image": true,
+        "alt_text_matches": true
+      }
+    },
+    {
+      "status": "ok",
+      "item_index": 3,
+      "post_id": 4780,
+      "title": "高年齢者の労働災害防止で中小企業が見直したい安全衛生対策",
+      "expected_media_id": 4793,
+      "expected_alt_text": "高年齢者の労働災害防止と安全衛生対策を表すビジネスイメージ",
+      "media_url": "https://ksrfp.com/ksrfp/wp-content/uploads/refresh-3-occupational-safety-featured.jpg",
+      "media_alt_text": "高年齢者の労働災害防止と安全衛生対策を表すビジネスイメージ",
+      "actual": {
+        "status": "draft",
+        "date": "2026-06-22T09:00:00",
+        "featured_media": 4793
+      },
+      "checks": {
+        "status_draft": true,
+        "featured_media_matches": true,
+        "media_is_supported_image": true,
+        "alt_text_matches": true
+      }
+    },
+    {
+      "status": "ok",
+      "item_index": 4,
+      "post_id": 4782,
+      "title": "トライアル雇用助成金を使う前に中小企業が確認したい採用実務",
+      "expected_media_id": 4795,
+      "expected_alt_text": "採用面談とトライアル雇用の実務確認を表すビジネスイメージ",
+      "media_url": "https://ksrfp.com/ksrfp/wp-content/uploads/refresh-4-subsidy-featured.jpg",
+      "media_alt_text": "採用面談とトライアル雇用の実務確認を表すビジネスイメージ",
+      "actual": {
+        "status": "draft",
+        "date": "2026-06-22T09:00:00",
+        "featured_media": 4795
+      },
+      "checks": {
+        "status_draft": true,
+        "featured_media_matches": true,
+        "media_is_supported_image": true,
+        "alt_text_matches": true
+      }
+    },
+    {
+      "status": "ok",
+      "item_index": 5,
+      "post_id": 4784,
+      "title": "子ども・子育て支援金制度で中小企業が確認したい給与計算と説明準備",
+      "expected_media_id": 4797,
+      "expected_alt_text": "社会保険料と給与計算の確認を表すビジネスイメージ",
+      "media_url": "https://ksrfp.com/ksrfp/wp-content/uploads/refresh-5-social-insurance-featured.jpg",
+      "media_alt_text": "社会保険料と給与計算の確認を表すビジネスイメージ",
+      "actual": {
+        "status": "draft",
+        "date": "2026-06-22T09:00:00",
+        "featured_media": 4797
+      },
+      "checks": {
+        "status_draft": true,
+        "featured_media_matches": true,
+        "media_is_supported_image": true,
+        "alt_text_matches": true
+      }
+    },
+    {
+      "status": "ok",
+      "item_index": 6,
+      "post_id": 4786,
+      "title": "無期転換ルールの5年通算で中小企業が確認したい契約更新の実務",
+      "expected_media_id": 4799,
+      "expected_alt_text": "有期契約の更新管理と労働条件確認を表すビジネスイメージ",
+      "media_url": "https://ksrfp.com/ksrfp/wp-content/uploads/refresh-6-fixed-term-conversion-featured.jpg",
+      "media_alt_text": "有期契約の更新管理と労働条件確認を表すビジネスイメージ",
+      "actual": {
+        "status": "draft",
+        "date": "2026-06-22T09:00:00",
+        "featured_media": 4799
+      },
+      "checks": {
+        "status_draft": true,
+        "featured_media_matches": true,
+        "media_is_supported_image": true,
+        "alt_text_matches": true
+      }
+    }
+  ],
+  "checks": {
+    "all_posts_draft": true,
+    "all_featured_media_matches": true,
+    "all_media_supported_images": true,
+    "all_alt_text_matches": true,
+    "media_ids_unique": true,
+    "media_urls_unique": true,
+    "item_count": 6
+  }
+}

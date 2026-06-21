@@ -1,0 +1,270 @@
+{
+  "version": 1,
+  "note": "記事作成履歴ではなく、法律・制度名の一次情報確認に使う固定ソース。processed_pdfs/topic_historyを白紙にしても、この品質ゲートは保持する。",
+  "items": [
+    {
+      "item_type": "legal_or制度",
+      "claim": "労働基準法",
+      "status": "verified",
+      "source_url": "https://laws.e-gov.go.jp/law/322AC0000000049",
+      "verified_at": "2026-06-20",
+      "memo": "e-Gov法令検索の労働基準法本文で確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "働き方改革関連法",
+      "status": "verified",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000148322.html",
+      "verified_at": "2026-06-20",
+      "memo": "厚生労働省の働き方改革特設ページで確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "36協定",
+      "status": "verified",
+      "source_url": "https://www.mhlw.go.jp/content/000350731.pdf",
+      "verified_at": "2026-06-20",
+      "memo": "厚生労働省の時間外労働の上限規制資料で確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "時間外労働の上限規制",
+      "status": "verified",
+      "source_url": "https://www.mhlw.go.jp/hatarakikata/overtime.html",
+      "verified_at": "2026-06-20",
+      "memo": "厚生労働省の時間外労働の上限規制ページで確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "特別条項",
+      "status": "verified",
+      "source_url": "https://www.mhlw.go.jp/content/000350731.pdf",
+      "verified_at": "2026-06-20",
+      "memo": "厚生労働省の時間外労働の上限規制資料で確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "年5日取得義務",
+      "status": "verified",
+      "source_url": "https://www.mhlw.go.jp/content/000350327.pdf",
+      "verified_at": "2026-06-20",
+      "memo": "厚生労働省の年次有給休暇取得義務関連資料で確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "月45時間",
+      "status": "verified",
+      "source_url": "https://www.mhlw.go.jp/hatarakikata/overtime.html",
+      "verified_at": "2026-06-20",
+      "memo": "厚生労働省の時間外労働の上限規制ページで確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "年360時間",
+      "status": "verified",
+      "source_url": "https://www.mhlw.go.jp/hatarakikata/overtime.html",
+      "verified_at": "2026-06-20",
+      "memo": "厚生労働省の時間外労働の上限規制ページで確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "パートタイム・有期雇用労働法",
+      "status": "verified",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000046152.html",
+      "verified_at": "2026-06-20",
+      "memo": "厚生労働省の同一労働同一賃金関連ページで確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "同一労働同一賃金ガイドライン",
+      "status": "verified",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000144972.html",
+      "verified_at": "2026-06-20",
+      "memo": "厚生労働省の同一労働同一賃金特集ページで確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "同一労働同一賃金",
+      "status": "verified",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000144972.html",
+      "verified_at": "2026-06-20",
+      "memo": "厚生労働省の同一労働同一賃金特集ページで確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "人材開発支援助成金",
+      "status": "verified",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/koyou/kyufukin/d01-1.html",
+      "verified_at": "2026-06-20",
+      "memo": "厚生労働省の人材開発支援助成金ページで確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "事業展開等リスキリング支援コース",
+      "status": "verified",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/koyou/kyufukin/d01-1.html",
+      "verified_at": "2026-06-20",
+      "memo": "厚生労働省の人材開発支援助成金ページで確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "65歳超雇用推進助成金",
+      "status": "verified",
+      "source_url": "https://www.jeed.go.jp/elderly/subsidy/subsidy_hyouka.html",
+      "verified_at": "2026-06-20",
+      "memo": "高齢・障害・求職者雇用支援機構の助成金ページで確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "高年齢者評価制度等雇用管理改善コース",
+      "status": "verified",
+      "source_url": "https://www.jeed.go.jp/elderly/subsidy/subsidy_hyouka.html",
+      "verified_at": "2026-06-20",
+      "memo": "高齢・障害・求職者雇用支援機構の助成金ページで確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "雇用管理整備計画",
+      "status": "verified",
+      "source_url": "https://www.jeed.go.jp/elderly/subsidy/subsidy_hyouka.html",
+      "verified_at": "2026-06-20",
+      "memo": "高齢・障害・求職者雇用支援機構の助成金ページで確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "女性活躍推進法",
+      "status": "verified",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000091025.html",
+      "verified_at": "2026-06-20",
+      "memo": "厚生労働省の女性活躍推進法特集ページで確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "一般事業主行動計画",
+      "status": "verified",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000091025.html",
+      "verified_at": "2026-06-20",
+      "memo": "厚生労働省の女性活躍推進法特集ページで確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "男女間賃金差異",
+      "status": "verified",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000091025.html",
+      "verified_at": "2026-06-20",
+      "memo": "厚生労働省の女性活躍推進法特集ページで確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "トライアル雇用助成金",
+      "status": "verified",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/koyou/kyufukin/trial_koyou.html",
+      "verified_at": "2026-06-20",
+      "memo": "厚生労働省のトライアル雇用助成金ページで確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "一般トライアルコース",
+      "status": "verified",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/koyou/kyufukin/trial_koyou.html",
+      "verified_at": "2026-06-20",
+      "memo": "厚生労働省のトライアル雇用助成金ページで確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "労働契約法",
+      "status": "verified",
+      "source_url": "https://laws.e-gov.go.jp/law/419AC0000000128",
+      "verified_at": "2026-06-20",
+      "memo": "e-Gov法令検索の労働契約法本文で確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "無期転換ルール",
+      "status": "verified",
+      "source_url": "https://muki.mhlw.go.jp/",
+      "verified_at": "2026-06-20",
+      "memo": "厚生労働省の無期転換ポータルで確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "労働条件明示",
+      "status": "verified",
+      "source_url": "https://www.mhlw.go.jp/stf/newpage_32105.html",
+      "verified_at": "2026-06-20",
+      "memo": "厚生労働省の労働条件明示ルール変更案内で確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "子ども・子育て支援金制度",
+      "status": "verified",
+      "source_url": "https://www.cfa.go.jp/policies/kodomokosodateshienkinseido",
+      "verified_at": "2026-06-20",
+      "memo": "こども家庭庁の子ども・子育て支援金制度ページで確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "子ども・子育て支援金",
+      "status": "verified",
+      "source_url": "https://www.cfa.go.jp/policies/kodomokosodateshienkinseido",
+      "verified_at": "2026-06-20",
+      "memo": "こども家庭庁の子ども・子育て支援金制度ページで確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "ストレスチェック",
+      "status": "verified",
+      "source_url": "https://www.mhlw.go.jp/bunya/roudoukijun/anzeneisei12/",
+      "verified_at": "2026-06-20",
+      "memo": "厚生労働省のストレスチェック制度ページで確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "高年齢者の労働災害防止",
+      "status": "verified",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/anzen/newpage_00007.html",
+      "verified_at": "2026-06-20",
+      "memo": "厚生労働省の高年齢労働者の安全衛生対策ページで確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "育児・介護休業法",
+      "status": "verified",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000130583.html",
+      "verified_at": "2026-06-20",
+      "memo": "厚生労働省の育児・介護休業法関連ページで確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "育児介護休業法",
+      "status": "verified",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000130583.html",
+      "verified_at": "2026-06-20",
+      "memo": "厚生労働省の育児・介護休業法関連ページで確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "産後パパ育休",
+      "status": "verified",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000130583.html",
+      "verified_at": "2026-06-20",
+      "memo": "厚生労働省の育児・介護休業法関連ページで確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "出生時育児休業給付金",
+      "status": "verified",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000158500.html",
+      "verified_at": "2026-06-20",
+      "memo": "厚生労働省の雇用保険給付関連ページで確認。"
+    },
+    {
+      "item_type": "legal_or制度",
+      "claim": "育児休業給付金",
+      "status": "verified",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000158500.html",
+      "verified_at": "2026-06-20",
+      "memo": "厚生労働省の雇用保険給付関連ページで確認。"
+    }
+  ]
+}

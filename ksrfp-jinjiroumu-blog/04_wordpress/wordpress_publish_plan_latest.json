@@ -1,0 +1,30 @@
+{
+  "generated_at": "2026-06-21T08:47:43",
+  "api_base": "https://ksrfp.com/wp-json/wp/v2",
+  "credentials_ready": true,
+  "payload_ready_to_send": false,
+  "blocked_reasons": [
+    "アイキャッチ画像ファイルが存在しません。",
+    "アイキャッチ画像がWordPressアップロード準備完了になっていません。",
+    "アイキャッチ背景は、記事ごとに新規生成した写真品質ソースが必須です。過去画像・既存画像・同テーマ画像の再利用は不可です。"
+  ],
+  "post_status": "draft",
+  "post_date": "2026-06-22T09:00:00+09:00",
+  "post_title": "働き方改革関連法施行後に見直したい中小企業の労働時間管理",
+  "post_payload_path": "03_generated/wordpress-payloads/post_payload_latest.json",
+  "image_plan_path": "03_generated/images/featured_image_plan_latest.json",
+  "featured_image_path": "/Users/ug/Desktop/codex_works/ksrfp-jinjiroumu-blog/03_generated/images/working-hours-item-3-featured.png",
+  "featured_image_exists": false,
+  "featured_image_quality_ready": false,
+  "featured_image_base_status": "requires_fresh_photorealistic_source",
+  "featured_image_quality_gate": "blocked_until_fresh_article_photo_source_ready",
+  "featured_image_alt": "中小企業の労働時間管理と36協定の見直しを表すビジネスイメージ",
+  "arkhe_css_editor": {
+    "css": ".c-postContent h2{\nborder-bottom: solid 1px black;\npadding: 0.3em 0;\n}\n.c-postContent h3{\nbackground: #efefef;\npadding: 0.5em 0.6em;\n}\n.c-postContent h4{\npadding: 0.25em 0.5em;\nborder-left: solid 3px #265d9b;\n}",
+    "rest_meta_key": null,
+    "note": "Arkhe CSS EditorのREST API上のmeta keyは未確認。投稿API実装時に画面/APIで確認して反映する。"
+  },
+  "write_guard": "Use --execute with KSRFP_ALLOW_WORDPRESS_WRITE=1. Default is dry-run only.",
+  "status": "blocked",
+  "next_action": "停止理由を解消してから、動作確認フェーズで実行する。"
+}

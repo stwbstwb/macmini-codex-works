@@ -1,0 +1,46 @@
+# Secrets
+config/secrets/*
+!config/secrets/README.md
+*.env
+.env
+.env.*
+
+# Runtime logs
+07_logs/*
+!07_logs/.gitkeep
+!07_logs/README.md
+*.log
+
+# Generated state
+08_state/*
+!08_state/.gitkeep
+!08_state/README.md
+
+# Local success-state backups
+00_project/backups/*
+
+# Downloaded source files
+01_inputs/newsletters/drive-downloads/*
+!01_inputs/newsletters/drive-downloads/.gitkeep
+
+# Generated artifacts
+03_generated/articles/*
+!03_generated/articles/.gitkeep
+03_generated/outlines/*
+!03_generated/outlines/.gitkeep
+03_generated/images/*
+!03_generated/images/.gitkeep
+03_generated/wordpress-payloads/*
+!03_generated/wordpress-payloads/.gitkeep
+03_generated/review-texts/*
+!03_generated/review-texts/.gitkeep
+
+# Browser automation profile
+.playwright/
+
+# OS files
+.DS_Store
+
+# Python cache
+__pycache__/
+*.pyc

@@ -1,0 +1,16 @@
+{
+  "generated_at": "2026-06-21T13:03:49",
+  "status": "payload_blocked",
+  "external_api_enabled": true,
+  "api_base": "https://ksrfp.com/wp-json/wp/v2",
+  "secret_file_found": true,
+  "secret_file_path": "/Users/ug/Desktop/codex_works/ksrfp-jinjiroumu-blog/config/secrets/アプリケーションパスワード情報.rtf",
+  "username_found": true,
+  "application_password_found": true,
+  "payload_found": true,
+  "payload_ready_to_send": false,
+  "post_status": "draft",
+  "connection_checked": false,
+  "connection_ok": false,
+  "next_action": "ファクトチェック、表示確認、下書き保存テストを完了してから送信する。"
+}

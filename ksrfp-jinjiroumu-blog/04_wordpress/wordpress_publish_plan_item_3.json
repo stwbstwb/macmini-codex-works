@@ -1,0 +1,28 @@
+{
+  "generated_at": "2026-06-20T20:19:41",
+  "api_base": "https://ksrfp.com/wp-json/wp/v2",
+  "credentials_ready": true,
+  "payload_ready_to_send": true,
+  "blocked_reasons": [],
+  "initial_test_override": false,
+  "post_status": "draft",
+  "post_date": "2026-06-22T09:00:00+09:00",
+  "post_title": "女性活躍推進法の一般事業主行動計画で中小企業が確認したい実務",
+  "post_payload_path": "03_generated/wordpress-payloads/post_payload_item_3.json",
+  "image_plan_path": "03_generated/images/featured_image_plan_item_3.json",
+  "featured_image_path": "/Users/ug/Desktop/codex_works/ksrfp-jinjiroumu-blog/03_generated/images/women-action-plan-item-3-featured.png",
+  "featured_image_exists": true,
+  "featured_image_quality_ready": true,
+  "featured_image_base_status": "photo_source_copied",
+  "featured_image_quality_gate": "fresh_article_photo_source_verified",
+  "featured_image_alt": "女性活躍推進法の行動計画と人事データ確認を表すビジネスイメージ",
+  "arkhe_css_editor": {
+    "css": ".c-postContent h2{\nborder-bottom: solid 1px black;\npadding: 0.3em 0;\n}\n.c-postContent h3{\nbackground: #efefef;\npadding: 0.5em 0.6em;\n}\n.c-postContent h4{\npadding: 0.25em 0.5em;\nborder-left: solid 3px #265d9b;\n}",
+    "rest_meta_key": null,
+    "note": "Arkhe CSS EditorのREST API上のmeta keyは未確認。投稿API実装時に画面/APIで確認して反映する。"
+  },
+  "write_guard": "Use --execute with KSRFP_ALLOW_WORDPRESS_WRITE=1. Default is dry-run only.",
+  "payload_allowed_for_initial_test": false,
+  "status": "ready",
+  "next_action": "動作確認フェーズでメディアアップロードと下書き保存を実行する。"
+}

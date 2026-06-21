@@ -1,0 +1,68 @@
+{
+  "status": "created",
+  "generated_at": "2026-06-21T13:11:20",
+  "duplicate_recovery": {
+    "reused_existing_post": false,
+    "existing_post_id": null,
+    "existing_post_status": null
+  },
+  "media": {
+    "id": 4808,
+    "link": "https://ksrfp.com/ksrfp/wp-content/uploads/subsidy-item-2-featured-1-6.jpg",
+    "reused_existing_media": false
+  },
+  "featured_image": {
+    "path": "03_generated/images/subsidy-item-2-featured.png",
+    "sha256": "3575368cf0452bf072b102cd4c10c5fd9dbac9abf2d92e9c25090a39e6b44d8c",
+    "image_plan_path": "03_generated/images/featured_image_plan_item_2.json",
+    "post_payload_path": "03_generated/wordpress-payloads/post_payload_item_2.json"
+  },
+  "post": {
+    "id": 4809,
+    "status": "draft",
+    "date": "2026-06-22T09:00:00",
+    "link": "https://ksrfp.com/?p=4809"
+  },
+  "arkhe_css_editor": {
+    "status": "updated",
+    "method": "rest_settings",
+    "settings_keys": [
+      "arkhe_css_front",
+      "arkhe_css_editor"
+    ],
+    "css_length": 210,
+    "front_contains_css": true,
+    "editor_contains_css": true,
+    "arkhe_css_front_before_length": 243,
+    "arkhe_css_front_after_length": 243,
+    "arkhe_css_editor_before_length": 211,
+    "arkhe_css_editor_after_length": 211,
+    "post_id": 4809
+  },
+  "state_record": {
+    "wordpress_post_id": 4809,
+    "wordpress_url": "https://ksrfp.com/?p=4809",
+    "wordpress_status": "draft",
+    "scheduled_local": "2026-06-22T09:00:00+09:00",
+    "scheduled_gmt": "2026-06-22T00:00:00Z",
+    "status": "draft",
+    "topic_key": "815e0253fbd03041",
+    "pdf_name": "人事労務だより2026.5月号.pdf",
+    "section_group": "助成金情報",
+    "topic_title": "人材開発支援助成金（事業展開等リスキリング支援コース）",
+    "title": "人材開発支援助成金のリスキリング支援と申請前の実務",
+    "category_ids": [
+      5
+    ],
+    "tags": [],
+    "featured_media_id": 4808,
+    "featured_media_reused": false,
+    "featured_image_path": "03_generated/images/subsidy-item-2-featured.png",
+    "featured_image_sha256": "3575368cf0452bf072b102cd4c10c5fd9dbac9abf2d92e9c25090a39e6b44d8c",
+    "image_plan_path": "03_generated/images/featured_image_plan_item_2.json",
+    "post_payload_path": "03_generated/wordpress-payloads/post_payload_item_2.json",
+    "created_at": "2026-06-21T13:11:20"
+  },
+  "post_payload_path": "03_generated/wordpress-payloads/post_payload_item_2.json",
+  "image_plan_path": "03_generated/images/featured_image_plan_item_2.json"
+}

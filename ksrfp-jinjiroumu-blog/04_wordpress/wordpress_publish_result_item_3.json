@@ -1,0 +1,68 @@
+{
+  "status": "created",
+  "generated_at": "2026-06-21T13:11:22",
+  "duplicate_recovery": {
+    "reused_existing_post": false,
+    "existing_post_id": null,
+    "existing_post_status": null
+  },
+  "media": {
+    "id": 4810,
+    "link": "https://ksrfp.com/ksrfp/wp-content/uploads/working-hours-item-3-featured.jpg",
+    "reused_existing_media": false
+  },
+  "featured_image": {
+    "path": "03_generated/images/working-hours-item-3-featured.png",
+    "sha256": "995a019a144fa9f4ada5ec8957d53a5c7a4eb6d1c7cc845e8d766c129cac29db",
+    "image_plan_path": "03_generated/images/featured_image_plan_item_3.json",
+    "post_payload_path": "03_generated/wordpress-payloads/post_payload_item_3.json"
+  },
+  "post": {
+    "id": 4811,
+    "status": "draft",
+    "date": "2026-06-22T09:00:00",
+    "link": "https://ksrfp.com/?p=4811"
+  },
+  "arkhe_css_editor": {
+    "status": "updated",
+    "method": "rest_settings",
+    "settings_keys": [
+      "arkhe_css_front",
+      "arkhe_css_editor"
+    ],
+    "css_length": 210,
+    "front_contains_css": true,
+    "editor_contains_css": true,
+    "arkhe_css_front_before_length": 243,
+    "arkhe_css_front_after_length": 243,
+    "arkhe_css_editor_before_length": 211,
+    "arkhe_css_editor_after_length": 211,
+    "post_id": 4811
+  },
+  "state_record": {
+    "wordpress_post_id": 4811,
+    "wordpress_url": "https://ksrfp.com/?p=4811",
+    "wordpress_status": "draft",
+    "scheduled_local": "2026-06-22T09:00:00+09:00",
+    "scheduled_gmt": "2026-06-22T00:00:00Z",
+    "status": "draft",
+    "topic_key": "2cb51c7f0e3fb37f",
+    "pdf_name": "人事労務だより2026.5月号.pdf",
+    "section_group": "調査",
+    "topic_title": "「労働時間現状維持希望」多く  働き方改革関連法施行後５年の総点検  厚労省",
+    "title": "働き方改革関連法施行後に見直したい中小企業の労働時間管理",
+    "category_ids": [
+      7
+    ],
+    "tags": [],
+    "featured_media_id": 4810,
+    "featured_media_reused": false,
+    "featured_image_path": "03_generated/images/working-hours-item-3-featured.png",
+    "featured_image_sha256": "995a019a144fa9f4ada5ec8957d53a5c7a4eb6d1c7cc845e8d766c129cac29db",
+    "image_plan_path": "03_generated/images/featured_image_plan_item_3.json",
+    "post_payload_path": "03_generated/wordpress-payloads/post_payload_item_3.json",
+    "created_at": "2026-06-21T13:11:22"
+  },
+  "post_payload_path": "03_generated/wordpress-payloads/post_payload_item_3.json",
+  "image_plan_path": "03_generated/images/featured_image_plan_item_3.json"
+}

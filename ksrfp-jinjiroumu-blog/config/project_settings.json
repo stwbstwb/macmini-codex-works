@@ -1,0 +1,134 @@
+{
+  "project_name": "ksrfp-jinjiroumu-blog",
+  "timezone": "Asia/Tokyo",
+  "site_url": "https://ksrfp.com/",
+  "blog_url": "https://ksrfp.com/blog/",
+  "wordpress_api_base": "https://ksrfp.com/wp-json/wp/v2",
+  "wordpress_secret_path": "config/secrets/アプリケーションパスワード情報.rtf",
+  "google_drive_folder_id": "1oVBX-B1XliOCEcxqghojOjMzKvROpqBn",
+  "review_text_drive_folder_id": "1vFh7U9F2DhItpYRzVvJ2qRKUpvmOD7jp",
+  "review_text_drive_folder_url": "https://drive.google.com/drive/folders/1vFh7U9F2DhItpYRzVvJ2qRKUpvmOD7jp",
+  "google_drive_public_folder_enabled": true,
+  "google_drive_download_latest": true,
+  "articles_per_run": 3,
+  "default_post_status": "draft",
+  "set_post_slug": false,
+  "automation": {
+    "monthday": 1,
+    "hour": 0,
+    "minute": 0,
+    "timezone": "Asia/Tokyo",
+    "schedule_label": "毎月1日 0:00"
+  },
+  "retry_policy": {
+    "max_attempts": 3,
+    "retry_delay_seconds": 60,
+    "continue_after_failure": true
+  },
+  "completion_retry_policy": {
+    "max_attempts": 3,
+    "retry_delay_seconds": 30
+  },
+  "notification": {
+    "email_enabled": true,
+    "recipient": "stonewebstoneweb@gmail.com",
+    "send_on_success": true,
+    "send_on_failure": true,
+    "send_generation_stage_notifications": false,
+    "method": "smtp_secret_or_local_sendmail",
+    "smtp_secret_path": "config/secrets/email_smtp.json",
+    "write_eml_backup": true,
+    "delivery_max_attempts": 3,
+    "delivery_retry_delay_seconds": 10
+  },
+  "schedule": {
+    "weekday": "monday",
+    "hour": 9,
+    "minute": 0,
+    "timezone": "Asia/Tokyo",
+    "same_day_policy": "next_week",
+    "ignore_conflicts_for_draft": true,
+    "conflict_policy": "下書き保存のため、同じ月曜9:00の日付を3件すべてに設定する。実行日が月曜日の場合は翌週月曜9:00にする"
+  },
+  "arkhe_css_editor": ".c-postContent h2{\nborder-bottom: solid 1px black;\npadding: 0.3em 0;\n}\n.c-postContent h3{\nbackground: #efefef;\npadding: 0.5em 0.6em;\n}\n.c-postContent h4{\npadding: 0.25em 0.5em;\nborder-left: solid 3px #265d9b;\n}",
+  "wordpress_author": {
+    "id": 2,
+    "login": "ksrfp"
+  },
+  "wordpress_tags_enabled": false,
+  "wordpress_categories": [
+    {
+      "name": "ライフプランニング",
+      "slug": "life-planning",
+      "id": 13
+    },
+    {
+      "name": "助成金",
+      "slug": "subsidy",
+      "id": 5
+    },
+    {
+      "name": "労務管理",
+      "slug": "labor-management",
+      "id": 7
+    },
+    {
+      "name": "年金",
+      "slug": "pension",
+      "id": 15
+    },
+    {
+      "name": "給与計算",
+      "slug": "payroll",
+      "id": 25
+    },
+    {
+      "name": "給付金",
+      "slug": "benefits",
+      "id": 10
+    }
+  ],
+  "category_assignment_policy": "記事テーマと本文内容から最も近いカテゴリIDを1つ自動設定する。タグは設定しない。",
+  "publication_requires_verified_facts": true,
+  "wordpress_posting_requires_user_test": false,
+  "enable_external_api_calls": true,
+  "drive_auth_method": "google_drive_api_oauth_or_service_account",
+  "featured_image": {
+    "width": 1200,
+    "height": 630,
+    "require_new_image_per_article": true,
+    "forbid_reusing_previous_images": true,
+    "forbid_same_batch_photo_source_duplicates": true,
+    "scene_must_match_article_theme": true,
+    "style": "清潔感のあるビジネス向け。横浜の中小企業に向けた実務的で落ち着いた印象。背景写真自体には文字を入れず、後工程で記事タイトルを中央配置する。",
+    "title_overlay": {
+      "enabled": true,
+      "layout": "centered_blue_title_bands",
+      "blue": "#0057B8",
+      "text_color": "#FFFFFF",
+      "preferred_lines": 2,
+      "max_lines": 3,
+      "max_width_ratio": 0.86,
+      "font_size": 68,
+      "min_font_size": 34,
+      "padding_x": 24,
+      "padding_y": 12,
+      "line_gap": 8,
+      "radius": 10,
+      "shadow": true
+    }
+  },
+  "image_generation": {
+    "provider": "codex_image_tool_handoff",
+    "model": "chatgpt_max_plan_imagegen",
+    "request_size": "1536x1024",
+    "quality": "high",
+    "output_format": "png",
+    "required_in_preflight": false
+  },
+  "fallback_policy": {
+    "if_no_latest_pdf": "過去号から未処理かつカニバリリスクの低いテーマを選ぶ",
+    "if_fact_check_unverified": "WordPress送信前に停止する",
+    "if_wordpress_connection_fails": "ローカル生成物とログを保存して再実行可能にする"
+  }
+}
