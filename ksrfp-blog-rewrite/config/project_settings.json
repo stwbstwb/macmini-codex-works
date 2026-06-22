@@ -1,0 +1,108 @@
+{
+  "project_name": "ksrfp-blog-rewrite",
+  "timezone": "Asia/Tokyo",
+  "site_url": "https://ksrfp.com/",
+  "wordpress_api_base": "https://ksrfp.com/wp-json/wp/v2",
+  "wordpress_metrics_endpoint": "https://ksrfp.com/wp-json/ksrfp-rewrite/v1/post-metrics",
+  "wordpress_secret_search_dirs": [
+    "config/secrets",
+    "../ksrfp-jinjiroumu-blog/config/secrets"
+  ],
+  "candidate_selection": {
+    "post_type": "post",
+    "status": "publish",
+    "per_page": 100,
+    "recent_views_days": 30,
+    "minimum_age_days": 90,
+    "target_character_count": 3500,
+    "minimum_h2_count": 4,
+    "minimum_h3_count": 4,
+    "low_views_percentile": 35,
+    "top_n_report": 20,
+    "score_weights": {
+      "total_views": 40,
+      "recent_views": 25,
+      "short_content": 20,
+      "thin_structure": 15
+    },
+    "time_sensitive_keywords": [
+      "最新",
+      "速報",
+      "ニュース",
+      "時事",
+      "今年",
+      "来年",
+      "昨年",
+      "年度",
+      "年末",
+      "年始",
+      "月末",
+      "期限",
+      "締切",
+      "終了",
+      "開始",
+      "改正",
+      "改定",
+      "施行",
+      "義務化",
+      "新制度",
+      "経過措置",
+      "引き上げ",
+      "引き下げ",
+      "助成金",
+      "補助金",
+      "支援金",
+      "給付金",
+      "コロナ",
+      "新型コロナ",
+      "感染症",
+      "臨時休業",
+      "緊急",
+      "暫定"
+    ]
+  },
+  "article_generation": {
+    "target_character_count": 4500,
+    "minimum_h2_count": 8,
+    "minimum_h3_count": 12,
+    "include_reference_notes": false
+  },
+  "google_drive": {
+    "rewrite_output_folder": {
+      "id": "1hjyAEFrqu8WPLazi-A6DeRCtv44PJlKC",
+      "name": "過去記事リライト",
+      "url": "https://drive.google.com/drive/folders/1hjyAEFrqu8WPLazi-A6DeRCtv44PJlKC"
+    }
+  },
+  "featured_image": {
+    "width": 1200,
+    "height": 630,
+    "title_overlay": {
+      "enabled": true,
+      "layout": "centered_blue_title_bands",
+      "blue": "#0057B8",
+      "text_color": "#FFFFFF",
+      "preferred_lines": 2,
+      "max_lines": 3,
+      "max_width_ratio": 0.86,
+      "font_size": 68,
+      "min_font_size": 34,
+      "padding_x": 24,
+      "padding_y": 12,
+      "line_gap": 8,
+      "radius": 10,
+      "shadow": true
+    }
+  },
+  "notification": {
+    "email_enabled": true,
+    "recipient": "stonewebstoneweb@gmail.com",
+    "send_on_success": true,
+    "send_on_failure": true,
+    "smtp_secret_search_paths": [
+      "config/secrets/email_smtp.json",
+      "../ksrfp-jinjiroumu-blog/config/secrets/email_smtp.json"
+    ],
+    "write_eml_backup": true
+  }
+}

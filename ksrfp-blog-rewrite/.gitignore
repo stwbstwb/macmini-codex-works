@@ -1,0 +1,10 @@
+02_analysis/
+03_generated/
+04_wordpress/
+05_drive/
+07_logs/
+08_state/
+config/secrets/
+__pycache__/
+*.pyc
+.DS_Store
