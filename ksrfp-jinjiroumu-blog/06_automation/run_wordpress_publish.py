@@ -129,12 +129,13 @@ def publish_all_payloads(execute: bool) -> dict[str, object]:
                 "mismatch": match,
                 "reason": "同一runのWordPress作成済み記録が現在の投稿ペイロードと一致しないため、重複作成防止で停止しました。",
             }
-        return {
-            "status": "already_created",
-            "run_key": state.run_key,
-            "state_path": str(state.path),
-            "items": existing_items,
-        }
+        if not match.get("requires_update"):
+            return {
+                "status": "already_created",
+                "run_key": state.run_key,
+                "state_path": str(state.path),
+                "items": existing_items,
+            }
 
     if execute:
         validate_batch_payloads_ready(payload_paths, image_dir)
@@ -192,6 +193,7 @@ def existing_created_items_match_payloads(
     payload_paths: list[Path],
 ) -> dict[str, object]:
     mismatches: list[dict[str, object]] = []
+    update_reasons: list[dict[str, object]] = []
     existing_by_index = {
         int(item.get("item_index") or 0): item
         for item in existing_items
@@ -204,6 +206,8 @@ def existing_created_items_match_payloads(
         source = payload.get("source", {}) if isinstance(payload.get("source"), dict) else {}
         expected_topic_key = stable_key(source.get("pdf_name"), source.get("section_group"), source.get("topic_title"))
         expected_title = wordpress.get("title")
+        expected_date = str(wordpress.get("date") or "")
+        expected_date_gmt = str(wordpress.get("date_gmt") or "")
         expected_payload_path = f"03_generated/wordpress-payloads/{payload_path.name}"
         existing = existing_by_index.get(index)
         if not isinstance(existing, dict):
@@ -238,9 +242,29 @@ def existing_created_items_match_payloads(
                     "expected": expected_title,
                 }
             )
+        if expected_date and str(state_record.get("scheduled_local") or "")[:16] != expected_date[:16]:
+            update_reasons.append(
+                {
+                    "item_index": index,
+                    "reason": "scheduled_local_changed",
+                    "actual": state_record.get("scheduled_local"),
+                    "expected": expected_date,
+                }
+            )
+        if expected_date_gmt and str(state_record.get("scheduled_gmt") or "")[:16] != expected_date_gmt[:16]:
+            update_reasons.append(
+                {
+                    "item_index": index,
+                    "reason": "scheduled_gmt_changed",
+                    "actual": state_record.get("scheduled_gmt"),
+                    "expected": expected_date_gmt,
+                }
+            )
     return {
         "matched": not mismatches,
         "mismatches": mismatches,
+        "requires_update": bool(update_reasons),
+        "update_reasons": update_reasons,
     }
 
 
@@ -267,6 +291,7 @@ def validate_batch_payloads_ready(payload_paths: list[Path], image_dir: Path) ->
         manifest_source = (
             manifest_payload.get("source", {}) if isinstance(manifest_payload.get("source"), dict) else {}
         )
+        schedule_plan = payload.get("schedule_plan", {}) if isinstance(payload.get("schedule_plan"), dict) else {}
         image_plan_path = image_dir / f"featured_image_plan_item_{index}.json"
         image_plan = read_json_file(image_plan_path)
         image_path = PROJECT_ROOT / str(image_plan.get("output_path") or "")
@@ -299,8 +324,8 @@ def validate_batch_payloads_ready(payload_paths: list[Path], image_dir: Path) ->
             item_reasons.append("wordpress_slug_must_be_empty")
         if len(categories) != 1 or not categories or int(categories[0]) not in allowed_categories:
             item_reasons.append(f"wordpress_category_invalid:{categories}")
-        if not is_monday_0900(wordpress.get("date")):
-            item_reasons.append(f"wordpress_date_not_monday_0900:{wordpress.get('date')}")
+        if not is_execution_date_target_time(wordpress.get("date"), schedule_plan):
+            item_reasons.append(f"wordpress_date_not_execution_date_target_time:{wordpress.get('date')}")
         if not image_plan_path.exists():
             item_reasons.append("image_plan_missing")
         if not image_file_exists:
@@ -320,12 +345,33 @@ def validate_batch_payloads_ready(payload_paths: list[Path], image_dir: Path) ->
         )
 
 
-def is_monday_0900(value: object) -> bool:
+def is_execution_date_target_time(value: object, schedule_plan: dict[str, object]) -> bool:
     try:
-        parsed = datetime.fromisoformat(str(value))
-    except ValueError:
+        parsed = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+        target_date = schedule_execution_date(schedule_plan)
+        target_hour, target_minute = schedule_target_time(schedule_plan)
+    except (TypeError, ValueError):
         return False
-    return parsed.weekday() == 0 and parsed.hour == 9 and parsed.minute == 0 and parsed.second == 0
+    return (
+        parsed.date() == target_date
+        and parsed.hour == target_hour
+        and parsed.minute == target_minute
+        and parsed.second == 0
+    )
+
+
+def schedule_execution_date(schedule_plan: dict[str, object]) -> object:
+    raw_date = str(schedule_plan.get("execution_date") or "").strip()
+    if raw_date:
+        return datetime.fromisoformat(raw_date[:10]).date()
+    generated_at = str(schedule_plan.get("generated_at") or "").replace("Z", "+00:00")
+    return datetime.fromisoformat(generated_at).date()
+
+
+def schedule_target_time(schedule_plan: dict[str, object]) -> tuple[int, int]:
+    raw_time = str(schedule_plan.get("target_time") or "09:00").strip()
+    hour_text, minute_text, *_ = raw_time.split(":") + ["0"]
+    return int(hour_text), int(minute_text)
 
 
 def validate_batch_wordpress_titles(payload_paths: list[Path]) -> None:

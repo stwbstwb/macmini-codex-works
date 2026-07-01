@@ -86,6 +86,15 @@ def item_index_from_path(path: Path) -> int:
         return 0
 
 
+def load_review_text_by_index() -> dict[int, dict[str, Any]]:
+    rows: dict[int, dict[str, Any]] = {}
+    for path in current_review_text_paths():
+        payload = read_json(path, {}) or {}
+        if isinstance(payload, dict):
+            rows[item_index_from_path(path)] = payload
+    return rows
+
+
 def drive_id_from_url(url: str) -> str | None:
     marker = "/d/"
     if marker not in url:
@@ -137,6 +146,7 @@ def build_articles(drive_uploads: dict[str, dict[str, str]]) -> list[dict[str, A
     items = payloads.get("items", []) if isinstance(payloads.get("items"), list) else []
     publish_by_index = load_publish_by_index()
     refresh_by_index = load_featured_image_refresh_by_index()
+    review_text_by_index = load_review_text_by_index()
     articles: list[dict[str, Any]] = []
     for item_index, payload in enumerate(items, start=1):
         if not isinstance(payload, dict):
@@ -161,7 +171,10 @@ def build_articles(drive_uploads: dict[str, dict[str, str]]) -> list[dict[str, A
             and str(current_post_id) == str(refresh_post_id)
         )
         title = str(wordpress.get("title") or "")
-        review_file = f"{str(wordpress.get('date') or '')[2:4]}{str(wordpress.get('date') or '')[5:7]}{str(wordpress.get('date') or '')[8:10]} {title}.txt"
+        review_metadata = review_text_by_index.get(item_index, {})
+        review_file = str(review_metadata.get("file_name") or "")
+        if not review_file:
+            review_file = f"{str(wordpress.get('date') or '')[2:4]}{str(wordpress.get('date') or '')[5:7]}{str(wordpress.get('date') or '')[8:10]} {title}.txt"
         upload = drive_uploads.get(review_file, {})
         articles.append(
             {

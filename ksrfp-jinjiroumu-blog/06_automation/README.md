@@ -10,7 +10,8 @@ Codexオートメーションで毎月実行する処理を置きます。
 - 実行入口: `06_automation/run_weekly_automation.py`
 - CodexオートメーションID: `ksrfp-weekly-run`
 - 1回の生成件数: 3件
-- WordPress下書き日付: 3件すべて翌週月曜9:00
+- WordPress下書き日付: 3件すべて実行日9:00
+- 確認用テキストファイル名: 作成日の `YYMMDD` を先頭に付ける
 
 現在のローカル実行:
 
@@ -126,9 +127,9 @@ Google Driveプラグインで保存したURLを通知へ反映する場合:
 
 ```bash
 /Users/ug/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 06_automation/record_drive_plugin_uploads.py \
-  --drive-upload '260622 記事タイトル1.txt=https://drive.google.com/file/d/...' \
-  --drive-upload '260622 記事タイトル2.txt=https://drive.google.com/file/d/...' \
-  --drive-upload '260622 記事タイトル3.txt=https://drive.google.com/file/d/...'
+  --drive-upload '260701 記事タイトル1.txt=https://drive.google.com/file/d/...' \
+  --drive-upload '260701 記事タイトル2.txt=https://drive.google.com/file/d/...' \
+  --drive-upload '260701 記事タイトル3.txt=https://drive.google.com/file/d/...'
 ```
 
 この記録後に最終通知を送ると、通知メールへDrive URLが反映される。

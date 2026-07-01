@@ -205,6 +205,50 @@ SOURCE_CANDIDATES = {
 }
 
 
+CONTEXTUAL_VERIFICATIONS = [
+    {
+        "item_type": "date",
+        "claims": ["令和8年10月1日"],
+        "context_keywords": ["同一労働同一賃金", "パートタイム・有期雇用"],
+        "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000144972.html",
+        "verified_at": "2026-07-01",
+        "memo": "厚生労働省の同一労働同一賃金特集ページで、施行規則と告示の改正が令和8年10月1日に施行・適用されることを確認。",
+    },
+    {
+        "item_type": "date",
+        "claims": ["令和8年4月28日"],
+        "context_keywords": ["同一労働同一賃金", "施行規則", "告示"],
+        "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000144972.html",
+        "verified_at": "2026-07-01",
+        "memo": "厚生労働省の同一労働同一賃金特集ページで、改正後の省令・指針が令和8年4月28日に公布されたことを確認。",
+    },
+    {
+        "item_type": "number",
+        "claims": ["6か月", "3か月"],
+        "context_keywords": ["65歳超雇用推進助成金", "高年齢者評価制度等雇用管理改善コース", "雇用管理整備計画", "計画開始日"],
+        "source_url": "https://www.jeed.go.jp/elderly/subsidy/subsidy_hyouka.html",
+        "verified_at": "2026-07-01",
+        "memo": "高齢・障害・求職者雇用支援機構の高年齢者評価制度等雇用管理改善コースページで、雇用管理整備計画書を計画開始日の6か月前の日から3か月前の日までに提出することを確認。",
+    },
+    {
+        "item_type": "date",
+        "claims": ["令和8年4月1日"],
+        "context_keywords": ["女性活躍推進法", "一般事業主行動計画", "男女間賃金差異"],
+        "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000091025.html",
+        "verified_at": "2026-07-01",
+        "memo": "厚生労働省の女性活躍推進法特集ページで、令和8年4月1日施行の改正により101人以上300人以下にも男女間賃金差異の情報公表が必須項目になることを確認。",
+    },
+    {
+        "item_type": "number",
+        "claims": ["100人", "101人", "300人", "301人"],
+        "context_keywords": ["女性活躍推進法", "一般事業主行動計画", "男女間賃金差異"],
+        "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000091025.html",
+        "verified_at": "2026-07-01",
+        "memo": "厚生労働省の女性活躍推進法特集ページで、101人以上300人以下への男女間賃金差異公表義務化と、301人以上の既存義務を確認。100人以下の扱いは、義務対象が101人以上とされることから文脈上確認。",
+    },
+]
+
+
 @dataclass
 class FactCheckItem:
     item_type: str
@@ -322,22 +366,67 @@ def extract_fact_check_items(article: str) -> list[FactCheckItem]:
 def apply_fact_check_registry(items: list[FactCheckItem]) -> None:
     registry = read_json(STATE_DIR / "fact_check_registry.json", {"items": []}) or {"items": []}
     seed = read_json(CONFIG_DIR / "fact_check_verified_sources.json", {"items": []}) or {"items": []}
-    verified_entries = {}
+    verified_entries: dict[tuple[str, str], list[dict[str, object]]] = {}
     for entry in [*seed.get("items", []), *registry.get("items", [])]:
         if entry.get("status") != "verified":
             continue
         key = (entry.get("item_type") or "", normalize_key(str(entry.get("claim") or "")))
-        verified_entries[key] = entry
+        verified_entries.setdefault(key, []).append(entry)
 
     for item in items:
-        entry = verified_entries.get((item.item_type, normalize_key(item.claim)))
+        entries = verified_entries.get((item.item_type, normalize_key(item.claim)), [])
+        entry = next((candidate for candidate in entries if registry_entry_matches_item(item, candidate)), None)
         if not entry:
             continue
-        item.status = "verified"
-        item.note = "一次情報確認済み"
-        item.verified_source_url = str(entry.get("source_url") or "")
-        item.verified_at = str(entry.get("verified_at") or "")
-        item.verification_note = str(entry.get("memo") or "")
+        mark_verified(item, entry)
+
+    apply_contextual_verifications(items)
+
+
+def registry_entry_matches_item(item: FactCheckItem, entry: dict[str, object]) -> bool:
+    keywords = [str(keyword) for keyword in entry.get("context_keywords", []) if str(keyword).strip()]
+    if keywords:
+        return context_has_any_keyword(item.context, keywords)
+    if item.item_type == "legal_or制度":
+        return True
+    return False
+
+
+def apply_contextual_verifications(items: list[FactCheckItem]) -> None:
+    for item in items:
+        if item.status == "verified":
+            continue
+        for rule in CONTEXTUAL_VERIFICATIONS:
+            if item.item_type != rule["item_type"]:
+                continue
+            claims = [normalize_key(str(claim)) for claim in rule.get("claims", [])]
+            if normalize_key(item.claim) not in claims:
+                continue
+            keywords = [str(keyword) for keyword in rule.get("context_keywords", [])]
+            if not context_has_any_keyword(item.context, keywords):
+                continue
+            mark_verified(
+                item,
+                {
+                    "source_url": rule["source_url"],
+                    "verified_at": rule["verified_at"],
+                    "memo": rule["memo"],
+                },
+            )
+            break
+
+
+def context_has_any_keyword(context: str, keywords: list[str]) -> bool:
+    normalized_context = normalize_key(context)
+    return any(normalize_key(keyword) in normalized_context for keyword in keywords)
+
+
+def mark_verified(item: FactCheckItem, entry: dict[str, object]) -> None:
+    item.status = "verified"
+    item.note = "一次情報確認済み"
+    item.verified_source_url = str(entry.get("source_url") or "")
+    item.verified_at = str(entry.get("verified_at") or "")
+    item.verification_note = str(entry.get("memo") or "")
 
 
 def overlaps(start: int, end: int, spans: list[tuple[int, int]]) -> bool:

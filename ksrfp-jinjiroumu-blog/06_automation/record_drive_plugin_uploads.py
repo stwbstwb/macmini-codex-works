@@ -19,6 +19,7 @@ from ksrfp_jinjiroumu_blog.artifact_fingerprint import (  # noqa: E402
 )
 from ksrfp_jinjiroumu_blog.io_utils import read_json, write_json, write_markdown  # noqa: E402
 from ksrfp_jinjiroumu_blog.paths import GENERATED_DIR, LOGS_DIR  # noqa: E402
+from ksrfp_jinjiroumu_blog.review_text import build_review_file_name  # noqa: E402
 
 
 def drive_id_from_url(url: str) -> str:
@@ -75,6 +76,18 @@ def record_uploads(values: list[str]) -> dict[str, Any]:
     for path in current_review_text_paths():
         payload = read_json(path, {}) or {}
         file_name = str(payload.get("file_name") or "")
+        policy_errors = review_text_policy_errors(payload)
+        if policy_errors:
+            items.append(
+                {
+                    "item_index": item_index_from_path(path),
+                    "status": "blocked_review_text_policy_mismatch",
+                    "file_name": file_name,
+                    "metadata_path": relative(path),
+                    "reason": " / ".join(policy_errors),
+                }
+            )
+            continue
         if file_name not in mappings:
             items.append(
                 {
@@ -132,6 +145,26 @@ def record_uploads(values: list[str]) -> dict[str, Any]:
         "items": items,
         "unmatched_mappings": missing,
     }
+
+
+def review_text_policy_errors(payload: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    if payload.get("file_date_source_type") != "created_at":
+        errors.append(f"file_date_source_type_not_created_at:{payload.get('file_date_source_type')}")
+    title = str(payload.get("title") or "")
+    date_source = payload.get("file_date_source") or payload.get("generated_at")
+    try:
+        parsed = datetime.fromisoformat(str(date_source).replace("Z", "+00:00"))
+    except (TypeError, ValueError):
+        errors.append(f"file_date_source_invalid:{date_source}")
+        return errors
+    expected_file_name = build_review_file_name(title, now=parsed)
+    if payload.get("file_name") != expected_file_name:
+        errors.append(f"file_name_mismatch:actual={payload.get('file_name')} expected={expected_file_name}")
+    output_path = str(payload.get("output_path") or "")
+    if output_path and Path(output_path).name != expected_file_name:
+        errors.append(f"output_path_name_mismatch:actual={Path(output_path).name} expected={expected_file_name}")
+    return errors
 
 
 def current_review_text_paths() -> list[Path]:

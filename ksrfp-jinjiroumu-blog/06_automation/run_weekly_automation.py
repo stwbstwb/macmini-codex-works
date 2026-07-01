@@ -28,6 +28,7 @@ from ksrfp_jinjiroumu_blog.artifact_fingerprint import (  # noqa: E402
     manifest_fingerprint,
     payload_matches_current_manifest,
 )
+from ksrfp_jinjiroumu_blog.article_brief import source_policy_violations  # noqa: E402
 from ksrfp_jinjiroumu_blog.external_preflight import run_external_preflight  # noqa: E402
 from ksrfp_jinjiroumu_blog.image_gate import featured_image_gate_reasons  # noqa: E402
 from ksrfp_jinjiroumu_blog.io_utils import read_json  # noqa: E402
@@ -565,6 +566,7 @@ def classify_existing_artifacts_for_resume() -> dict[str, object]:
     all_ready = True
     image_only_blocked = True
     blocked_reasons: list[dict[str, object]] = []
+    policy_blocked: list[dict[str, object]] = []
     for index, payload in enumerate(manifest_items, start=1):
         if not isinstance(payload, dict):
             all_ready = False
@@ -573,6 +575,21 @@ def classify_existing_artifacts_for_resume() -> dict[str, object]:
             continue
         row = resume_article_summary(index, payload)
         article_rows.append(row)
+        source = as_dict(payload.get("source"))
+        policy_violations = source_policy_violations({key: str(value or "") for key, value in source.items()})
+        if policy_violations:
+            all_ready = False
+            image_only_blocked = False
+            policy_blocked.append(
+                {
+                    "item_index": index,
+                    "title": row.get("article_title"),
+                    "source_pdf_name": row.get("source_pdf_name"),
+                    "source_section_group": row.get("source_section_group"),
+                    "source_topic_title": row.get("source_topic_title"),
+                    "policy_violations": policy_violations,
+                }
+            )
         item_ready = bool(row.get("wordpress_payload_ready_to_send")) and bool(row.get("featured_image_quality_ready"))
         if not item_ready:
             all_ready = False
@@ -601,6 +618,13 @@ def classify_existing_artifacts_for_resume() -> dict[str, object]:
                 }
             )
 
+    if policy_blocked:
+        return {
+            "status": "not_resumable",
+            "reason": "current manifest violates the current selection policy",
+            "articles": article_rows,
+            "blocked_reasons": [*blocked_reasons, *policy_blocked],
+        }
     if all_ready:
         return {
             "status": "generation_ready_for_wordpress",

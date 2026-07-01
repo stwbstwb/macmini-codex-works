@@ -9,6 +9,7 @@ from random import Random
 
 from .io_utils import read_csv_dicts, read_json, to_float, to_int, write_csv_dicts, write_markdown
 from .paths import CANNIBALIZATION_DIR, SEO_ANALYSIS_DIR, STATE_DIR, TOPIC_SELECTION_DIR
+from .selection_policy import subsidy_topic_exclusion_reason
 from .state_manager import stable_key, used_topic_keys
 
 
@@ -262,6 +263,11 @@ def editorial_policy_score(candidate: dict[str, str], labels: str) -> tuple[int,
     text = f"{section} {title} {excerpt}"
     reasons: list[str] = []
     penalty = 0
+
+    subsidy_exclusion_reason = subsidy_topic_exclusion_reason(candidate)
+    if subsidy_exclusion_reason:
+        penalty += 80
+        reasons.append(subsidy_exclusion_reason)
 
     if "ニュース" in section:
         penalty += 60

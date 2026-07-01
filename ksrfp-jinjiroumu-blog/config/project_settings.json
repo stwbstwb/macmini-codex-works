@@ -48,7 +48,7 @@
     "timezone": "Asia/Tokyo",
     "same_day_policy": "next_week",
     "ignore_conflicts_for_draft": true,
-    "conflict_policy": "下書き保存のため、同じ月曜9:00の日付を3件すべてに設定する。実行日が月曜日の場合は翌週月曜9:00にする"
+    "conflict_policy": "下書き保存のため、実行日9:00の日付を3件すべてに設定する。future投稿として公開予約する場合のみ曜日計算と衝突回避を行う"
   },
   "arkhe_css_editor": ".c-postContent h2{\nborder-bottom: solid 1px black;\npadding: 0.3em 0;\n}\n.c-postContent h3{\nbackground: #efefef;\npadding: 0.5em 0.6em;\n}\n.c-postContent h4{\npadding: 0.25em 0.5em;\nborder-left: solid 3px #265d9b;\n}",
   "wordpress_author": {

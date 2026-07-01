@@ -25,12 +25,12 @@ DRIVE_TOKEN_PATH = CONFIG_DIR / "secrets" / "google_drive_access_token.txt"
 def build_review_text_file(upload: bool = False) -> dict[str, Any]:
     settings = read_json(CONFIG_DIR / "project_settings.json", {}) or {}
     folder_id = str(settings.get("review_text_drive_folder_id") or "")
+    generated_at = datetime.now()
     article_path = GENERATED_DIR / "articles" / "article_draft_latest.md"
     article_markdown = read_text(article_path) if article_path.exists() else ""
     title = extract_title(article_markdown)
     body = extract_body(article_markdown)
-    schedule_date = load_scheduled_datetime()
-    file_name = build_review_file_name(title, now=schedule_date)
+    file_name = build_review_file_name(title, now=generated_at)
     output_dir = GENERATED_DIR / "review-texts"
     output_path = output_dir / file_name
     text = render_review_text(title, body)
@@ -49,10 +49,11 @@ def build_review_text_file(upload: bool = False) -> dict[str, Any]:
 
     result = {
         "status": "ok" if article_markdown else "no_article",
-        "generated_at": datetime.now().isoformat(timespec="seconds"),
+        "generated_at": generated_at.isoformat(timespec="seconds"),
         "title": title,
         "file_name": file_name,
-        "file_date_source": schedule_date.isoformat(timespec="seconds") if schedule_date else "generated_at",
+        "file_date_source": generated_at.isoformat(timespec="seconds"),
+        "file_date_source_type": "created_at",
         "output_path": f"03_generated/review-texts/{file_name}",
         "latest_path": "03_generated/review-texts/review_text_latest.txt",
         "drive_folder_id": folder_id,
@@ -95,21 +96,6 @@ def build_review_file_name(title: str, now: datetime | None = None) -> str:
     date_prefix = current.strftime("%y%m%d")
     safe_title = sanitize_filename(title)
     return f"{date_prefix} {safe_title}.txt"
-
-
-def load_scheduled_datetime() -> datetime | None:
-    payload = read_json(GENERATED_DIR / "wordpress-payloads" / "post_payload_latest.json", {}) or {}
-    wordpress = payload.get("wordpress", {}) if isinstance(payload, dict) else {}
-    date_text = wordpress.get("date") if isinstance(wordpress, dict) else None
-    if not date_text:
-        schedule = read_json(GENERATED_DIR / "wordpress-payloads" / "schedule_plan_latest.json", {}) or {}
-        date_text = schedule.get("scheduled_date_for_wordpress") if isinstance(schedule, dict) else None
-    if not date_text:
-        return None
-    try:
-        return datetime.fromisoformat(str(date_text).replace("Z", "+00:00"))
-    except ValueError:
-        return None
 
 
 def sanitize_filename(value: str) -> str:
@@ -264,6 +250,7 @@ def render_review_text_report(result: dict[str, Any]) -> str:
             f"- 記事タイトル: {result['title']}",
             f"- ファイル名: {result['file_name']}",
             f"- ファイル名日付: {result.get('file_date_source') or 'generated_at'}",
+            f"- ファイル名日付の種類: {result.get('file_date_source_type') or 'created_at'}",
             f"- 保存先: {result['output_path']}",
             f"- Driveフォルダ: {result.get('drive_folder_url') or '未設定'}",
             f"- Driveアップロード: {upload.get('status')}",

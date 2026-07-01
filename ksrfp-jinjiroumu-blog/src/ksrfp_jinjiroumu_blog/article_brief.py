@@ -5,6 +5,7 @@ import re
 
 from .io_utils import read_csv_dicts, read_json, write_json, write_markdown
 from .paths import GENERATED_DIR, TOPIC_SELECTION_DIR
+from .selection_policy import subsidy_topic_exclusion_reason
 
 
 REGIONAL_TERMS = {
@@ -176,6 +177,9 @@ def is_editorially_fit(row: dict[str, str]) -> bool:
 
 def source_policy_violations(row: dict[str, str]) -> list[str]:
     violations: list[str] = []
+    subsidy_exclusion_reason = subsidy_topic_exclusion_reason(row)
+    if subsidy_exclusion_reason:
+        violations.append("subsidy_or_grant_topic:" + subsidy_exclusion_reason)
     if str(row.get("seo_article_fit", "")).lower() == "false":
         violations.append("seo_article_fit=false")
     if int(row.get("editorial_policy_penalty") or 0) >= 40:

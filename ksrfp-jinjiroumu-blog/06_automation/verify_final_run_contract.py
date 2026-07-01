@@ -20,6 +20,7 @@ from ksrfp_jinjiroumu_blog.artifact_fingerprint import current_manifest_digest  
 from ksrfp_jinjiroumu_blog.paths import GENERATED_DIR, LOGS_DIR, STATE_DIR, WORDPRESS_DIR  # noqa: E402
 from ksrfp_jinjiroumu_blog.state_manager import stable_key  # noqa: E402
 from ksrfp_jinjiroumu_blog.article_brief import source_policy_violations  # noqa: E402
+from ksrfp_jinjiroumu_blog.review_text import build_review_file_name  # noqa: E402
 
 
 FORBIDDEN_CONTENT_PATTERNS = (
@@ -126,17 +127,41 @@ def normalize_title(value: str) -> str:
     return re.sub(r"\s+", "", value or "").strip().lower()
 
 
-def is_monday_0900(value: Any) -> bool:
+def is_execution_date_target_time(value: Any, schedule_plan: dict[str, Any]) -> bool:
     try:
-        parsed = datetime.fromisoformat(str(value))
-    except ValueError:
+        parsed = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+        target_date = schedule_execution_date(schedule_plan)
+        target_hour, target_minute = schedule_target_time(schedule_plan)
+    except (TypeError, ValueError):
         return False
-    return parsed.weekday() == 0 and parsed.hour == 9 and parsed.minute == 0 and parsed.second == 0
+    return (
+        parsed.date() == target_date
+        and parsed.hour == target_hour
+        and parsed.minute == target_minute
+        and parsed.second == 0
+    )
 
 
-def expected_review_file_name(title: str, wordpress_date: Any) -> str:
-    text = str(wordpress_date or "")
-    return f"{text[2:4]}{text[5:7]}{text[8:10]} {title}.txt"
+def schedule_execution_date(schedule_plan: dict[str, Any]) -> Any:
+    raw_date = str(schedule_plan.get("execution_date") or "").strip()
+    if raw_date:
+        return datetime.fromisoformat(raw_date[:10]).date()
+    generated_at = str(schedule_plan.get("generated_at") or "").replace("Z", "+00:00")
+    return datetime.fromisoformat(generated_at).date()
+
+
+def schedule_target_time(schedule_plan: dict[str, Any]) -> tuple[int, int]:
+    raw_time = str(schedule_plan.get("target_time") or "09:00").strip()
+    hour_text, minute_text, *_ = raw_time.split(":") + ["0"]
+    return int(hour_text), int(minute_text)
+
+
+def expected_review_file_name(title: str, created_at: Any) -> str:
+    try:
+        parsed = datetime.fromisoformat(str(created_at).replace("Z", "+00:00"))
+    except (TypeError, ValueError):
+        return ""
+    return build_review_file_name(title, now=parsed)
 
 
 def drive_url_has_file_id(value: Any) -> bool:
@@ -182,6 +207,7 @@ def validate_payloads(contract: Contract, settings: dict[str, Any], count: int) 
         quality = payload.get("quality", {}) if isinstance(payload.get("quality"), dict) else {}
         featured = payload.get("featured_image", {}) if isinstance(payload.get("featured_image"), dict) else {}
         source = payload.get("source", {}) if isinstance(payload.get("source"), dict) else {}
+        schedule_plan = payload.get("schedule_plan", {}) if isinstance(payload.get("schedule_plan"), dict) else {}
         manifest_source = (
             manifest_payload.get("source", {}) if isinstance(manifest_payload.get("source"), dict) else {}
         )
@@ -199,9 +225,14 @@ def validate_payloads(contract: Contract, settings: dict[str, Any], count: int) 
         contract.add(f"payload_{index}_tags_empty", wordpress.get("tags") == [], actual=wordpress.get("tags"))
         contract.add(f"payload_{index}_slug_not_set", "slug" not in wordpress or not wordpress.get("slug"), actual=wordpress.get("slug"))
         contract.add(f"payload_{index}_one_allowed_category", len(categories) == 1 and int(categories[0]) in allowed_categories, actual=categories)
-        contract.add(f"payload_{index}_date_monday_0900", is_monday_0900(wordpress.get("date")), actual=wordpress.get("date"))
+        contract.add(
+            f"payload_{index}_date_execution_date_target_time",
+            is_execution_date_target_time(wordpress.get("date"), schedule_plan),
+            actual=wordpress.get("date"),
+            schedule_plan=schedule_plan,
+        )
         contract.add(f"payload_{index}_quality_ready", quality.get("draft_quality_passed") is True and quality.get("publication_ready") is True and quality.get("safe_to_publish") is True, actual=quality)
-        contract.add(f"payload_{index}_facts_verified", int(quality.get("fact_check_unverified") or 0) == 0 and quality.get("publication_gate") == "verified", actual=quality)
+        contract.add(f"payload_{index}_facts_verified", facts_gate_passed(quality), actual=quality)
         contract.add(f"payload_{index}_image_ready", featured.get("wordpress_ready") is True and featured.get("photo_source_exists") is True and featured.get("photo_source_fresh") is True, actual=featured)
         policy_violations = source_policy_violations({key: str(value or "") for key, value in source.items()})
         contract.add(f"payload_{index}_source_policy_fit", not policy_violations, violations=policy_violations, source=source)
@@ -213,6 +244,13 @@ def validate_payloads(contract: Contract, settings: dict[str, Any], count: int) 
         titles=[row["title"] for row in title_rows],
     )
     return payload_rows
+
+
+def facts_gate_passed(quality: dict[str, Any]) -> bool:
+    return int(quality.get("fact_check_unverified") or 0) == 0 and quality.get("publication_gate") in {
+        "verified",
+        "no_fact_items",
+    }
 
 
 def validate_article_quality(contract: Contract, count: int) -> None:
@@ -408,11 +446,10 @@ def validate_drive(contract: Contract, payload_rows: list[dict[str, Any]], count
         upload = metadata.get("upload", {}) if isinstance(metadata.get("upload"), dict) else {}
         output_path = PROJECT_ROOT / str(metadata.get("output_path") or "")
         expected_row = expected_by_index.get(index, {})
-        expected_payload = expected_row.get("payload", {}) if isinstance(expected_row.get("payload"), dict) else {}
-        expected_wordpress = (
-            expected_payload.get("wordpress", {}) if isinstance(expected_payload.get("wordpress"), dict) else {}
+        expected_file_name = expected_review_file_name(
+            str(expected_row.get("title") or ""),
+            metadata.get("file_date_source") or metadata.get("generated_at"),
         )
-        expected_file_name = expected_review_file_name(str(expected_row.get("title") or ""), expected_wordpress.get("date"))
         contract.add(f"drive_review_text_{index}_metadata_current", is_current(metadata_path, manifest_path), path=rel(metadata_path), mtime=mtime_iso(metadata_path))
         contract.add(
             f"drive_review_text_{index}_manifest_digest_matches",
@@ -421,6 +458,7 @@ def validate_drive(contract: Contract, payload_rows: list[dict[str, Any]], count
             expected=current_manifest_digest(),
         )
         contract.add(f"drive_review_text_{index}_file_name_matches", metadata.get("file_name") == expected_file_name, actual=metadata.get("file_name"), expected=expected_file_name)
+        contract.add(f"drive_review_text_{index}_file_date_source_created_at", metadata.get("file_date_source_type") == "created_at", actual=metadata.get("file_date_source_type"))
         contract.add(f"drive_review_text_{index}_file_exists", nonempty_file(output_path), path=rel(output_path))
         contract.add(f"drive_review_text_{index}_uploaded", upload.get("status") == "uploaded", actual=upload)
         url = upload.get("webViewLink") or upload.get("url")

@@ -20,6 +20,7 @@ from ksrfp_jinjiroumu_blog.artifact_fingerprint import (  # noqa: E402
 )
 from ksrfp_jinjiroumu_blog.io_utils import read_json, write_json, write_markdown  # noqa: E402
 from ksrfp_jinjiroumu_blog.paths import GENERATED_DIR, LOGS_DIR  # noqa: E402
+from ksrfp_jinjiroumu_blog.review_text import build_review_file_name  # noqa: E402
 from ksrfp_jinjiroumu_blog.review_text import upload_review_text  # noqa: E402
 
 
@@ -93,6 +94,19 @@ def upload_batch() -> dict[str, Any]:
                 }
             )
             continue
+        policy_errors = review_text_policy_errors(metadata)
+        if policy_errors:
+            items.append(
+                {
+                    "item_index": item_index_from_path(metadata_path),
+                    "status": "blocked_review_text_policy_mismatch",
+                    "metadata_path": relative(metadata_path),
+                    "file_name": metadata.get("file_name"),
+                    "path": output_path_text,
+                    "reason": " / ".join(policy_errors),
+                }
+            )
+            continue
         text_path = PROJECT_ROOT / str(output_path_text)
         if not text_path.exists():
             items.append(
@@ -144,6 +158,26 @@ def upload_batch() -> dict[str, Any]:
         "wordpress_verification_current": verification_current,
         "items": items,
     }
+
+
+def review_text_policy_errors(metadata: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    if metadata.get("file_date_source_type") != "created_at":
+        errors.append(f"file_date_source_type_not_created_at:{metadata.get('file_date_source_type')}")
+    title = str(metadata.get("title") or "")
+    date_source = metadata.get("file_date_source") or metadata.get("generated_at")
+    try:
+        parsed = datetime.fromisoformat(str(date_source).replace("Z", "+00:00"))
+    except (TypeError, ValueError):
+        errors.append(f"file_date_source_invalid:{date_source}")
+        return errors
+    expected_file_name = build_review_file_name(title, now=parsed)
+    if metadata.get("file_name") != expected_file_name:
+        errors.append(f"file_name_mismatch:actual={metadata.get('file_name')} expected={expected_file_name}")
+    output_path = str(metadata.get("output_path") or "")
+    if output_path and Path(output_path).name != expected_file_name:
+        errors.append(f"output_path_name_mismatch:actual={Path(output_path).name} expected={expected_file_name}")
+    return errors
 
 
 def write_logs(payload: dict[str, Any]) -> None:

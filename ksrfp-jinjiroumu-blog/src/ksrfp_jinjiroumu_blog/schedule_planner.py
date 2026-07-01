@@ -33,27 +33,39 @@ def build_schedule_plan(now: datetime | None = None) -> dict[str, Any]:
     target_weekday = WEEKDAYS.get(str(schedule.get("weekday", "monday")).lower(), 0)
     target_hour = int(schedule.get("hour") or 9)
     target_minute = int(schedule.get("minute") or 0)
-    ignore_conflicts = bool(schedule.get("ignore_conflicts_for_draft")) and post_status == "draft"
-    reserved_slots = set() if ignore_conflicts else load_reserved_slots()
-    wordpress_check = (
-        {"slots": set(), "checked": False, "source": "conflict_check_skipped_for_draft", "error": None}
-        if ignore_conflicts
-        else load_wordpress_future_slots(settings, tz)
-    )
-    reserved_slots.update(wordpress_check["slots"])
-
-    candidate = nearest_future_weekday_at(current, target_weekday, target_hour, target_minute)
-    if schedule.get("same_day_policy") == "next_week" and candidate.date() == current.date():
-        candidate += timedelta(days=7)
-    skipped: list[str] = []
-    while local_slot_key(candidate) in reserved_slots:
-        skipped.append(candidate.isoformat(timespec="seconds"))
-        candidate += timedelta(days=7)
+    is_draft = post_status == "draft"
+    ignore_conflicts = is_draft
+    if is_draft:
+        candidate = current.replace(hour=target_hour, minute=target_minute, second=0, microsecond=0)
+        skipped: list[str] = []
+        wordpress_check = {
+            "slots": set(),
+            "checked": False,
+            "source": "conflict_check_skipped_for_draft_execution_date",
+            "error": None,
+        }
+        date_policy = "execution_date_for_draft"
+        note = "下書き保存では実行日の09:00をWordPress日付に設定する。future投稿として公開予約する場合のみ曜日計算と衝突回避を行う。"
+    else:
+        reserved_slots = load_reserved_slots()
+        wordpress_check = load_wordpress_future_slots(settings, tz)
+        reserved_slots.update(wordpress_check["slots"])
+        candidate = nearest_future_weekday_at(current, target_weekday, target_hour, target_minute)
+        if schedule.get("same_day_policy") == "next_week" and candidate.date() == current.date():
+            candidate += timedelta(days=7)
+        skipped = []
+        while local_slot_key(candidate) in reserved_slots:
+            skipped.append(candidate.isoformat(timespec="seconds"))
+            candidate += timedelta(days=7)
+        date_policy = "future_weekday_with_conflict_avoidance"
+        note = "future投稿として公開予約する場合は、設定曜日時刻を基準に既存予約との衝突回避を行う。"
 
     plan = {
         "status": "ok",
-        "generated_at": datetime.now(tz).isoformat(timespec="seconds"),
+        "generated_at": current.isoformat(timespec="seconds"),
         "timezone": tz_name,
+        "date_policy": date_policy,
+        "execution_date": current.date().isoformat(),
         "target_weekday": schedule.get("weekday", "monday"),
         "target_time": f"{target_hour:02d}:{target_minute:02d}",
         "scheduled_local": candidate.isoformat(timespec="seconds"),
@@ -68,7 +80,7 @@ def build_schedule_plan(now: datetime | None = None) -> dict[str, Any]:
         "wordpress_future_posts_error": wordpress_check.get("error"),
         "post_status": post_status,
         "ignore_conflicts_for_draft": ignore_conflicts,
-        "note": "下書き保存では3件すべて同じ翌週月曜9:00の日付を設定する。future投稿として公開予約する場合のみ衝突回避を行う。",
+        "note": note,
     }
     write_json(GENERATED_DIR / "wordpress-payloads" / "schedule_plan_latest.json", plan)
     write_markdown(GENERATED_DIR / "wordpress-payloads" / "schedule_plan_latest.md", render_schedule_plan(plan))
@@ -164,6 +176,8 @@ def render_schedule_plan(plan: dict[str, Any]) -> str:
         "# 予約投稿スケジュール計画",
         "",
         f"- 生成日時: {plan['generated_at']}",
+        f"- 日付方針: {plan.get('date_policy', '未設定')}",
+        f"- 実行日: {plan.get('execution_date', '未設定')}",
         f"- 投稿曜日: {plan['target_weekday']}",
         f"- 投稿時刻: {plan['target_time']}",
         f"- タイムゾーン: {plan['timezone']}",
